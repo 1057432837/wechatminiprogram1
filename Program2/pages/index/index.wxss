@@ -1,0 +1,106 @@
+page {
+  padding-top: 100rpx;
+}
+
+.tower-swiper .tower-item {
+  transform: scale(calc(0.5 + var(--index) / 10));
+  margin-left: calc(var(--left) * 100rpx - 150rpx);
+  z-index: var(--index);
+}
+
+.page {
+  height: 100Vh;
+  width: 100vw;
+}
+
+.page.show {
+  overflow: hidden;
+}
+
+/* pages/component/nav/nav.wxss */
+.VerticalNav.nav {
+  width: 200rpx;
+  white-space: initial;
+}
+
+.VerticalNav.nav .cu-item {
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  margin: 0;
+  border: none;
+  height: 50px;
+  position: relative;
+}
+
+.VerticalNav.nav .cu-item.cur {
+  background-color: #f1f1f1;
+}
+.VerticalNav.nav .cu-item.cur::after {
+  content: "";
+  width: 8rpx;
+  height: 30rpx;
+  border-radius: 10rpx 0 0 10rpx;
+  position: absolute;
+  background-color: currentColor;
+  top: 0;
+  right: 0rpx;
+  bottom: 0;
+  margin: auto;
+}
+.VerticalBox{
+  display: flex;
+}
+.VerticalMain{
+  background-color: #f1f1f1;
+}
+
+.swiper-notice {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10rpx 0 10rpx;
+}
+
+.swiper-notice text {
+  font-size: 28rpx;
+  color: #bfbfbf;
+}
+
+.swiper-notice image {
+  width: 50rpx;
+  height: 50rpx;
+}
+
+.swiper-nav {
+  height: 60rpx;
+  width: 80vw;
+  margin-left: 10rpx;
+}
+
+.swiper-nav swiper-item {
+  display: flex;
+  align-items: center;
+}
+
+.swiper-context {
+  font-size: 28rpx;
+  overflow: hidden;
+  color: #bfbfbf;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: 2rpx;
+}
+
+.img{
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.radius{
+  border-radius:10rpx 10rpx 10rpx 10rpx;
+}

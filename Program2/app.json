@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/me/me",
+    "pages/hot/hot",
+    "pages/new/new",
+    "pages/recommend/recommend",
+    "pages/yours/yours",
+    "pages/address/address"
+  ],
+  "window": {},
+  "tabBar": {
+    "color": "#000",
+    "selectedColor": "#328EEB",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "iconPath": "images/8.png",
+        "selectedIconPath": "images/9.png",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "iconPath": "images/1.png",
+        "selectedIconPath": "images/3.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap1.json",
+  "permission": {
+    "scope.userLocation": {
+      "desc": "这里填写描述信息(如：美团请求获取您的位置信息)"
+    }
+  }
+}

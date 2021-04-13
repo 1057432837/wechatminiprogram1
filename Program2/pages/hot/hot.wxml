@@ -1,0 +1,137 @@
+<scroll-view scroll-y class="DrawerPage {{modalName=='viewModal'?'show':''}}">
+<view wx:for="{{bookList}}">
+	<view class="cu-card article {{isCard?'no-card':''}}">
+		<view class="cu-item shadow">
+			<view class="title" wx:for="{{bookList}}">
+				<view class="text-cut">{{item.book1.name}}</view>
+			</view>
+			<view class="content">
+				<image wx:for="{{bookList}}" src="{{item.book1.image}}" mode="aspectFill"></image>
+				<view class="desc">
+					<view class="text-content" wx:for="{{bookList}}">{{item.book1.introduce}}</view>
+					<view>
+						<view class="cu-tag bg-red light sm round" wx:for="{{bookList}}">{{item.book1.class.class1}}</view>
+						<view class="cu-tag bg-green light sm round" wx:for="{{bookList}}">{{item.book1.class.class2}}</view>
+						<view class="flex padding justify-end flex padding align-end">
+							<button class="cu-btn icon cu-tag bg-blue light ">
+								<text class="cuIcon-add" bindtap="addToCart">		
+								</text>
+							</button>
+							<button class="cu-btn round bg-yellow light">购买</button>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>
+	<view class='padding margin text-center'>
+		<view class="flex padding justify-end flex padding align-end " bindtap="showModal"
+			data-target="viewModal">
+			<button class="cu-btn icon cu-tag bg-purple light cu-btn round lg ">
+				<text class="cuIcon-cart"></text>
+				<view class="cu-tag badge">{{addNumber}}</view>
+			</button>
+		</view>
+	</view>
+</scroll-view>
+<view class="DrawerClose {{modalName=='viewModal'?'show':''}}" bindtap="hideModal">
+	<text class="cuIcon-pullright"></text>
+</view>
+<scroll-view scroll-y class="DrawerWindow {{modalName=='viewModal'?'show':''}}">
+	<view wx:if="{{!isCartEmpty}}">
+		<view class="cart-item" wx:for="{{cartList}}" wx:key="{{item.merchantInfo.merchantId}}">
+			<!-- 商家部分布局 -->
+			<view class="item-box item-merchant">
+				<view class="cart-check-box">
+					<icon class="cart-item-redio" wx:if="{{item.merchantInfo.hasSelected}}" type="success" color="red"
+						data-merchant-id="{{item.merchantInfo.merchantId}}" bind:tap="selectGoodsGroup" />
+					<icon class="cart-item-redio" wx:else type="circle" color="gray"
+						data-merchant-id="{{item.merchantInfo.merchantId}}" bind:tap="selectGoodsGroup" />
+				</view>
+				<view class="merchant-info">
+					<view bind:tap="goToStoreHome">
+						<image src="http://n1.itc.cn/img8/wb/smccloud/recom/2015/05/29/143288664727843841.jpeg" mode="aspectFill" />
+						<text style="font-size: 37rpx;color:#424242; font-weight:bold;">{{item.merchantInfo.name}}<text
+								class="angle" /></text>
+					</view>
+				</view>
+			</view>
+			<!-- 商品列表部分布局 -->
+			<view class="item-box item-goods" wx:for="{{item.goodsList}}" wx:for-item="goods" wx:key="{{goods.id}}">
+				<view class="cart-check-box">
+					<icon class="cart-item-redio" wx:if="{{goods.hasSelected}}" type="success" color="red"
+						data-merchant-id="{{goods.merchantId}}" data-goods-id="{{goods.id}}" bind:tap="selectGoodsSingle" />
+					<icon class="cart-item-redio" wx:else type="circle" color="gray" data-merchant-id="{{goods.merchantId}}"
+						data-goods-id="{{goods.id}}" bind:tap="selectGoodsSingle" />
+				</view>
+				<view class="goods-info">
+					<view>
+						<image src="http://img14.360buyimg.com/n1/jfs/t20386/340/2137984030/165902/9dcb0893/5b45c9feN76c521a9.jpg"
+							style="width:200rpx;height:200rpx;border-radius:10rpx;" mode="widthFix"></image>
+					</view>
+					<!-- 商品信息部分布局 -->
+					<view class="goods-info-details">
+						<view>
+							<view style="font-size:30rpx;color:#3C3C3C;">{{goods.title}}</view>
+							<view style="margin-top:10rpx;">
+								<text class="goods-desc">静音自动摇头上下<text class="down" /></text>
+							</view>
+						</view>
+						<!-- 商品价格、数量布局 -->
+						<view class="goods-price-quantity">
+							<view>
+								<text>￥{{goods.price}}</text>
+							</view>
+							<view class="goods-quantity-switch-box">
+								<view class="goods-quantity-show" bind:tap="showUpdateQuantityDialog"
+									wx:if="{{goods.quantityUpdatable}}">
+									<view class="goods-quantity-boder goods-quantity-update">
+										<text class="quantity-minus-box" bindtap="minus" data-merchant-id="{{goods.merchantId}}"
+											data-goods-id="{{goods.id}}">-</text>
+										<text class="quantity_update-box">{{goods.quantity}}</text>
+										<text class="quantity-pluse-box" bindtap="pluse" data-merchant-id="{{goods.merchantId}}"
+											data-goods-id="{{goods.id}}">+</text>
+									</view>
+									<icon style="margin-left:10rpx;" type="cancel" color="red" data-merchant-id="{{goods.merchantId}}"
+										data-goods-id="{{goods.id}}" bind:tap="hideUpdateQuantity" />
+								</view>
+								<text wx:else class="goods-quantity-boder goods-quantity" bind:tap="showUpdateQuantity"
+									data-merchant-id="{{goods.merchantId}}" data-goods-id="{{goods.id}}">×{{goods.quantity}}</text>
+							</view>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view style="height:120rpx"></view>
+		<view class="cart-footer">
+			<view style="height:1rpx;background-color:#f5f5f5"></view>
+			<view class="cart-footer-box">
+				<view>
+					<icon wx:if="{{hasAllSelected}}" type="success" color="red" class="total-select" bindtap="selectAll" />
+					<icon wx:else type="circle" color="gray" class="total-select" bindtap="selectAll" />
+				</view>
+				<view>
+					<text class="total-text">合计:<text class="cart-toatl-price">￥{{totalPrice}}</text></text>
+					<text class="settlement-text" bind:tap="goToOrderSubmit">结算</text>
+				</view>
+			</view>
+		</view>
+	</view>
+	<block wx:else>
+		<view class="catnone">
+			<image src="../../assets/images/cart_none_a.png" mode="widthFix"></image>
+			<view class="catnone-text">您的购物车还是空的，快去买买买吧!</view>
+		</view>
+		<view class="cart-recommend">
+			<block wx:for="{{recommends}}" wx:key="index">
+				<view class="recommend-item">
+					<image class="item-img" src="{{item.image}}" mode="widthFix"></image>
+					<view class="item-text">{{item.text}}</view>
+					<view class="item-price">{{item.price}}</view>
+				</view>
+			</block>
+		</view>
+	</block>
+</scroll-view>

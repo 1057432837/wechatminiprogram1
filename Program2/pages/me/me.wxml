@@ -1,0 +1,73 @@
+<!--index.wxml-->
+<view>
+  <view>
+    <view wx:if="{{!hasUserInfo}}">
+      <view class="UCenter-bg">
+        <button class="cu-btn bg-blue lg light" wx:if="{{canIUseGetUserProfile}}" bindtap="getUserProfile"> 获取头像昵称
+        </button>
+      </view>
+    </view>
+    <view wx:else>
+      <view class="UCenter-bg">
+        <view class="user_info">
+          <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}"></image>
+          <view class="user_name">{{userInfo.nickName}}</view>
+        </view>
+      </view>
+    </view>
+    <view class="padding flex text-center text-grey bg-white shadow-warp">
+      <view class="flex flex-sub flex-direction solid-right">
+        <view class="margin-top-sm" bindtap="navigateToAddress">
+          <text class="cuIcon-global"></text>
+          <view>地址</view>
+        </view>
+      </view>
+      <view class="flex flex-sub flex-direction">
+        <view class="margin-top-sm">
+          <text class="cuIcon-file"></text>
+          <view>收藏</view>
+        </view>
+      </view>
+    </view>
+    <view class="cu-list menu card-menu margin-top-xl margin-bottom-xl shadow-lg radius">
+      <view class="cu-item arrow">
+        <view class="content" bindtap="CopyLink" data-link="https://github.com/weilanwl/ColorUI">
+          <text class="cuIcon-pay text-red"></text>
+          <text class="text-grey">待付款</text>
+        </view>
+      </view>
+      <view class="cu-item arrow">
+        <navigator class="content" url="/pages/about/about/about" hover-class="none">
+          <text class="cuIcon-deliver text-orange"></text>
+          <text class="text-grey">待发货</text>
+        </navigator>
+      </view>
+      <view class="cu-item arrow">
+        <navigator class="content" url="/pages/about/log/log" hover-class="none">
+          <text class="cuIcon-present text-yellow"></text>
+          <text class="text-grey">待收货</text>
+        </navigator>
+      </view>
+      <view class="cu-item arrow">
+        <view class="content" bindtap="showQrcode">
+          <text class="cuIcon-appreciate text-green"></text>
+          <text class="text-grey">待评价</text>
+        </view>
+      </view>
+      <view class="cu-item arrow">
+        <button class="cu-btn content" open-type="feedback">
+          <text class="cuIcon-notice text-blue"></text>
+          <text class="text-grey">售后</text>
+        </button>
+      </view>
+      <view class="cu-item arrow">
+        <navigator class="content" url="/pages/about/test/list" hover-class="none">
+          <text class="cuIcon-service text-purple"></text>
+          <text class="text-grey">意见反馈</text>
+        </navigator>
+      </view>
+    </view>
+    <view class="cu-tabbar-height">
+    </view>
+  </view>
+</view>
